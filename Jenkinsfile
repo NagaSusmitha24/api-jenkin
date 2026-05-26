@@ -20,7 +20,8 @@ pipeline {
                 bat '''
                 mvn clean package ^
                 -DskipTests ^
-                -s C:\\Users\\Admin\\.m2\\settings.xml'
+                -s C:\\Users\\Admin\\.m2\\settings.xml
+                '''
             }
         }
 
