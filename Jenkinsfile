@@ -18,7 +18,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building MuleSoft Application...'
-                bat 'mvn clean package -DskipTests'
+                bat 'mvn clean package -DskipTests -s C:\\Users\\Admin\\.m2\\settings.xml'
             }
         }
 
@@ -34,6 +34,7 @@ pipeline {
                 echo 'Deploying to CloudHub 2.0...'
                 bat """
                     mvn deploy -DskipTests ^
+                    -s C:\\Users\\Admin\\.m2\\settings.xml ^
                     -Danypoint.username=kancharlanaga ^
                     -Danypoint.password=Susmitha@123 ^
                     -Dcloudhub2.organizationId=6c5ad96b-67a8-4bc6-8bb1-12443d5764e1 ^
