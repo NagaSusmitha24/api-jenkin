@@ -1,5 +1,4 @@
 pipeline {
-
     agent any
 
     tools {
@@ -8,7 +7,6 @@ pipeline {
     }
 
     stages {
-
         stage('Checkout SCM') {
             steps {
                 echo 'Checking out code from GitHub...'
@@ -16,53 +14,51 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build & Package') {
             steps {
                 echo 'Building Mule Application...'
-
                 bat '''
                 mvn clean package ^
                 -DskipTests ^
-                -s C:\\Users\\Admin\\.m2\\settings.xml
+                -s C:\\Users\\jenkins\\.m2\\settings.xml
                 '''
             }
         }
 
-        stage('Test') {
+        stage('Publish to Exchange') {
             steps {
-                echo 'Running MUnit Tests...'
-
-                bat '''
-                mvn test ^
-                -s C:\\Users\\Admin\\.m2\\settings.xml
-                '''
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-
-                echo 'Deploying Mule Application...'
-
+                echo 'Publishing Mule Application to Anypoint Exchange...'
                 bat '''
                 mvn deploy ^
                 -DskipTests ^
                 -Danypoint.username=kancharlanaga ^
                 -Danypoint.password=Susmitha@123 ^
-                -s C:\\Users\\Admin\\.m2\\settings.xml
+                -s C:\\Users\\jenkins\\.m2\\settings.xml
+                '''
+            }
+        }
+
+        stage('Deploy to CloudHub 2.0') {
+            steps {
+                echo 'Deploying Mule Application to CloudHub 2.0...'
+                bat '''
+                mvn deploy ^
+                -DmuleDeploy ^
+                -DskipTests ^
+                -Danypoint.username=kancharlanaga ^
+                -Danypoint.password=Susmitha@123 ^
+                -s C:\\Users\\jenkins\\.m2\\settings.xml
                 '''
             }
         }
     }
 
     post {
-
         success {
-            echo 'Mule Application Deployment Successful!'
+            echo 'Mule Application Published to Exchange and Deployed to CloudHub 2.0 Successfully!'
         }
-
         failure {
-            echo 'Deployment Failed. Check Jenkins logs.'
+            echo 'Pipeline Failed. Check Jenkins logs.'
         }
     }
 }
