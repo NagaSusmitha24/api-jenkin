@@ -1,4 +1,5 @@
 pipeline {
+
     agent any
 
     tools {
@@ -17,37 +18,51 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo 'Building MuleSoft Application...'
-                bat 'mvn clean package -DskipTests -s C:\\Users\\Admin\\.m2\\settings.xml'
+                echo 'Building Mule Application...'
+
+                bat '''
+                mvn clean package ^
+                -DskipTests ^
+                -s C:\\Users\\Admin\\.m2\\settings.xml
+                '''
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Running MUnit Tests...'
-                bat 'mvn test'
+
+                bat '''
+                mvn test ^
+                -s C:\\Users\\Admin\\.m2\\settings.xml
+                '''
             }
         }
 
-        stage('Deploy to CloudHub 2.0') {
-    steps {
-        echo 'Deploying to CloudHub 2.0...'
-        bat """
-            mvn mule:deploy -DskipTests ^
-            -Danypoint.username=kancharlanaga ^
-            -Danypoint.password=Susmitha@123
-        """
-    }
-}
+        stage('Deploy') {
+            steps {
 
+                echo 'Deploying Mule Application...'
+
+                bat '''
+                mvn mule:deploy ^
+                -DskipTests ^
+                -Danypoint.username=kancharlanaga ^
+                -Danypoint.password=Susmitha@123 ^
+                -s C:\\Users\\Admin\\.m2\\settings.xml
+                '''
+            }
+        }
     }
 
     post {
+
         success {
-            echo 'Deployment to CloudHub 2.0 Successful!'
+            echo 'Mule Application Deployment Successful!'
         }
+
         failure {
-            echo 'Deployment Failed. Check logs above.'
+            echo 'Deployment Failed. Check Jenkins logs.'
         }
     }
 }
