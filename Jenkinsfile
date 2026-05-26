@@ -39,7 +39,7 @@ pipeline {
                     -Danypoint.password=Susmitha@123 ^
                     -Dcloudhub2.organizationId=6c5ad96b-67a8-4bc6-8bb1-12443d5764e1 ^
                     -Dcloudhub2.environment=Sandbox ^
-                    -Dcloudhub2.applicationName=api ^
+                    -Dcloudhub2.applicationName=api-v1 ^
                     -Dcloudhub2.region=us-east-2 ^
                     -Dcloudhub2.replicas=1 ^
                     -Dcloudhub2.vCores=0.1
