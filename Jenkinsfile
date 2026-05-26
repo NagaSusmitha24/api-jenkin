@@ -1,49 +1,59 @@
-pipeline { 
+pipeline {
+    agent any
 
-    agent any 
+    tools {
+        jdk 'JDK11'
+        maven 'Maven'
+    }
 
-    stages { 
+    stages {
 
-        stage('Build') { 
+        stage('Checkout SCM') {
+            steps {
+                echo 'Checking out code from GitHub...'
+                checkout scm
+            }
+        }
 
-            steps { 
+        stage('Build') {
+            steps {
+                echo 'Building MuleSoft Application...'
+                bat 'mvn clean package -DskipTests'
+            }
+        }
 
-                echo 'Application is in Building Phase' 
+        stage('Test') {
+            steps {
+                echo 'Running MUnit Tests...'
+                bat 'mvn test'
+            }
+        }
 
-                bat 'mvn clean install' 
+        stage('Deploy to CloudHub 2.0') {
+            steps {
+                echo 'Deploying to CloudHub 2.0...'
+                bat """
+                    mvn deploy -DskipTests ^
+                    -Danypoint.username=your-susmitha@apicentrics.com ^
+                    -Danypoint.password=your-password ^
+                    -Dcloudhub2.organizationId=6c5ad96b-67a8-4bc6-8bb1-12443d5764e1 ^
+                    -Dcloudhub2.environment=Sandbox ^
+                    -Dcloudhub2.applicationName=api ^
+                    -Dcloudhub2.region=us-east-2 ^
+                    -Dcloudhub2.replicas=1 ^
+                    -Dcloudhub2.vCores=0.1
+                """
+            }
+        }
 
-            } 
+    }
 
-        } 
-
-        stage('Test') { 
-
-            steps { 
-
-                echo 'Application is in Testing Phase' 
-
-                bat 'mvn test' 
-
-            } 
-
-        } 
-
-        stage('Deploy to Cloudhub') { 
-
-            environment { 
-
-                ANYPOINT_CREDENTIALS = credentials('anypointplatform') 
-
-            } 
-
-            steps { 
-
-                bat 'mvn deploy -DmuleDeploy -DmuleVersion=4.4.0 -Dusername=chaithanya_june20 -Dpassword=Chaithu@516 -DworkerType=MICRO -Dworkers=1 -Dregion=us-west-2' 
-
-            } 
-
-        } 
-
-    } 
-
-} 
+    post {
+        success {
+            echo 'Deployment to CloudHub 2.0 Successful!'
+        }
+        failure {
+            echo 'Deployment Failed. Check logs above.'
+        }
+    }
+}
