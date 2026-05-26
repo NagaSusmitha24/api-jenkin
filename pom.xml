@@ -27,6 +27,23 @@
 				<version>3.2.0</version>
 			</plugin>
 			<plugin>
+    <groupId>org.mule.tools.maven</groupId>
+    <artifactId>exchange-mule-maven-plugin</artifactId>
+    <version>0.1.7</version>
+    <executions>
+        <execution>
+            <id>default-exchange-pre-deploy</id>
+            <phase>deploy</phase>
+            <goals>
+                <goal>exchange-pre-deploy</goal>
+            </goals>
+        </execution>
+    </executions>
+    <configuration>
+        <skip>true</skip>      <!--  Add this line -->
+    </configuration>
+</plugin>
+			<plugin>
 				<groupId>org.mule.tools.maven</groupId>
 				<artifactId>mule-maven-plugin</artifactId>
 				<version>${mule.maven.plugin.version}</version>
