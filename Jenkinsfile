@@ -41,7 +41,7 @@ pipeline {
             steps {
                 echo 'Deploying Mule Application to CloudHub 2.0...'
                 bat '''
-                mvn deploy ^
+                mvn mule:deploy ^
                 -DmuleDeploy ^
                 -DskipTests ^
                 -Danypoint.username=kancharlanaga ^
