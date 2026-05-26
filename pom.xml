@@ -5,11 +5,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>bcd4b513-a887-4e07-b2c1-47e311f06160</groupId>
-	<artifactId>api</artifactId>
-	<version>1.0.2</version>
+	<artifactId>api-v1</artifactId>
+	<version>1.0.4</version>
 	<packaging>mule-application</packaging>
 
-	<name>api</name>
+	<name>api-v1</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -59,7 +59,7 @@
 						<businessGroupId>6c5ad96b-67a8-4bc6-8bb1-12443d5764e1</businessGroupId>
 						<environment>Sandbox</environment>
 						<target>Cloudhub-US-East-2</target>
-						<applicationName>api</applicationName>
+						<applicationName>api-v1</applicationName>
 						<replicas>1</replicas>
 						<vCores>0.1</vCores>
 						<deploymentSettings>
