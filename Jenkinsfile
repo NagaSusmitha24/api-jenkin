@@ -18,7 +18,7 @@ pipeline {
             steps {
                 echo 'Building Mule Application...'
                 bat '''
-                mvn clean package ^
+                mvn clean install ^
                 -DskipTests ^
                 -s %USERPROFILE%\\.m2\\settings.xml
                 '''
