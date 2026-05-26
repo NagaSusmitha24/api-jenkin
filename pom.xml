@@ -6,7 +6,7 @@
 
 	<groupId>bcd4b513-a887-4e07-b2c1-47e311f06160</groupId>
 	<artifactId>world-time</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.1</version>
 	<packaging>mule-application</packaging>
 
 	<name>world-time</name>
