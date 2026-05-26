@@ -6,11 +6,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>bcd4b513-a887-4e07-b2c1-47e311f06160</groupId>
-    <artifactId>api-susmitha-demo-v22</artifactId>
-    <version>1.0.1</version>
+    <artifactId>api-susmitha-demo-api1</artifactId>
+    <version>1.0.9</version>
     <packaging>mule-application</packaging>
 
-    <name>api-susmitha-demo-v22</name>
+    <name>api-susmitha-demo-api1</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -46,15 +46,7 @@
                         <region>us-east-2</region>
                     </cloudHubDeployment>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>deploy-to-cloudhub</id>
-                        <phase>deploy</phase>
-                        <goals>
-                            <goal>deploy</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                
             </plugin>
         </plugins>
     </build>
