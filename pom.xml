@@ -11,7 +11,7 @@
 
     <artifactId>api-susmitha</artifactId>
 
-    <version>1.0.4</version>
+    <version>1.0.5</version>
 
     <packaging>mule-application</packaging>
 
@@ -38,52 +38,42 @@
 
             <!-- Mule Maven Plugin -->
 
-            <plugin>
-                <groupId>org.mule.tools.maven</groupId>
+           <plugin>
+    <groupId>org.mule.tools.maven</groupId>
 
-                <artifactId>mule-maven-plugin</artifactId>
+    <artifactId>mule-maven-plugin</artifactId>
 
-                <version>${mule.maven.plugin.version}</version>
+    <version>4.7.0</version>
 
-                <extensions>true</extensions>
+    <extensions>true</extensions>
 
-                <configuration>
+    <configuration>
 
-                    <cloudhub2Deployment>
+        <cloudHubDeployment>
 
-                        <uri>https://anypoint.mulesoft.com</uri>
+            <uri>https://anypoint.mulesoft.com</uri>
 
-                        <provider>MC</provider>
+            <muleVersion>4.6.0</muleVersion>
 
-                        <environment>Sandbox</environment>
+            <username>${anypoint.username}</username>
 
-                        <target>Cloudhub-US-East-2</target>
+            <password>${anypoint.password}</password>
 
-                        <muleVersion>${app.runtime}</muleVersion>
+            <applicationName>api-v1-susmitha-demo</applicationName>
 
-                        <releaseChannel>LTS</releaseChannel>
+            <environment>Sandbox</environment>
 
-                        <javaVersion>17</javaVersion>
+            <workers>1</workers>
 
-                        <username>${anypoint.username}</username>
+            <workerType>MICRO</workerType>
 
-                        <password>${anypoint.password}</password>
+            <region>us-east-2</region>
 
-                        <applicationName>api-v1-susmitha-demo</applicationName>
+        </cloudHubDeployment>
 
-                        <replicas>1</replicas>
+    </configuration>
 
-                        <vCores>0.1</vCores>
-
-                        <deploymentSettings>
-                            <generateDefaultPublicUrl>true</generateDefaultPublicUrl>
-                        </deploymentSettings>
-
-                    </cloudhub2Deployment>
-
-                </configuration>
-
-            </plugin>
+</plugin>
 
         </plugins>
 		
