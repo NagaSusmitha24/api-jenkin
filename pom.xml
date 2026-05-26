@@ -3,18 +3,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<groupId>bcd4b513-a887-4e07-b2c1-47e311f06160</groupId>
 	<artifactId>api-v1</artifactId>
 	<version>1.0.4</version>
 	<packaging>mule-application</packaging>
-
 	<name>api-v1</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
 		<app.runtime>4.11.0</app.runtime>
 		<mule.maven.plugin.version>4.7.0</mule.maven.plugin.version>
 	</properties>
@@ -26,23 +23,18 @@
 				<artifactId>maven-clean-plugin</artifactId>
 				<version>3.2.0</version>
 			</plugin>
+
+			<!-- ✅ Exchange plugin - completely skipped -->
 			<plugin>
-    <groupId>org.mule.tools.maven</groupId>
-    <artifactId>exchange-mule-maven-plugin</artifactId>
-    <version>0.1.7</version>
-    <executions>
-        <execution>
-            <id>default-exchange-pre-deploy</id>
-            <phase>deploy</phase>
-            <goals>
-                <goal>exchange-pre-deploy</goal>
-            </goals>
-        </execution>
-    </executions>
-    <configuration>
-        <skip>true</skip>      <!--  Add this line -->
-    </configuration>
-</plugin>
+				<groupId>org.mule.tools.maven</groupId>
+				<artifactId>exchange-mule-maven-plugin</artifactId>
+				<version>0.1.7</version>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+
+			<!-- ✅ MuleSoft Deploy Plugin -->
 			<plugin>
 				<groupId>org.mule.tools.maven</groupId>
 				<artifactId>mule-maven-plugin</artifactId>
@@ -53,9 +45,8 @@
 						<uri>https://anypoint.mulesoft.com</uri>
 						<provider>MC</provider>
 						<muleVersion>4.11.0</muleVersion>
-						<server>anypoint-exchange-v3</server>
-						<username>kancharlanaga</username>
-						<password>Susmitha@123</password>
+						<username>${anypoint.username}</username>
+						<password>${anypoint.password}</password>
 						<businessGroupId>6c5ad96b-67a8-4bc6-8bb1-12443d5764e1</businessGroupId>
 						<environment>Sandbox</environment>
 						<target>Cloudhub-US-East-2</target>
@@ -72,14 +63,8 @@
 			</plugin>
 		</plugins>
 	</build>
-	<distributionManagement>
-		<repository>
-			<id>anypoint-exchange-v3</id>
-			<name>Anypoint Exchange</name>
-			<url>https://maven.anypoint.mulesoft.com/api/v3/organizations/bcd4b513-a887-4e07-b2c1-47e311f06160/maven</url>
-			<layout>default</layout>
-		</repository>
-	</distributionManagement>
+
+	<!-- ✅ distributionManagement REMOVED -->
 
 	<dependencies>
 		<dependency>
@@ -97,29 +82,24 @@
 	</dependencies>
 
 	<repositories>
-    <repository>
-        <id>mulesoft-releases</id>
-        <name>MuleSoft Releases</name>
-        <url>https://repository.mulesoft.org/nexus/repository/releases/</url>
-    </repository>
-    <repository>
-        <id>mulesoft-public</id>
-        <name>MuleSoft Public</name>
-        <url>https://repository.mulesoft.org/nexus/content/repositories/public/</url>
-    </repository>
-    <repository>
-        <id>anypoint-exchange-v3</id>
-        <name>Anypoint Exchange</name>
-        <url>https://maven.anypoint.mulesoft.com/api/v3/maven</url>
-    </repository>
-</repositories>
+		<repository>
+			<id>mulesoft-releases</id>
+			<name>MuleSoft Releases</name>
+			<url>https://repository.mulesoft.org/nexus/repository/releases/</url>
+		</repository>
+		<repository>
+			<id>mulesoft-public</id>
+			<name>MuleSoft Public</name>
+			<url>https://repository.mulesoft.org/nexus/content/repositories/public/</url>
+		</repository>
+	</repositories>
 
-<pluginRepositories>
-    <pluginRepository>
-        <id>mulesoft-releases</id>
-        <name>MuleSoft Releases</name>
-        <url>https://repository.mulesoft.org/nexus/repository/releases/</url>
-    </pluginRepository>
-</pluginRepositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>mulesoft-releases</id>
+			<name>MuleSoft Releases</name>
+			<url>https://repository.mulesoft.org/nexus/repository/releases/</url>
+		</pluginRepository>
+	</pluginRepositories>
 
 </project>
