@@ -6,6 +6,24 @@
             <username>kancharlanaga</username>
             <password>Susmitha@123</password>
         </server>
+         <profiles>
+    <profile>
+      <id>mulesoft</id>
+      <repositories>
+        <repository>
+          <id>mulesoft-releases</id>
+          <url>https://repository.mulesoft.org/nexus/repository/releases/</url>
+        </repository>
+        <repository>
+          <id>mulesoft-public</id>
+          <url>https://repository.mulesoft.org/nexus/content/repositories/public/</url>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+  <activeProfiles>
+    <activeProfile>mulesoft</activeProfile>
+  </activeProfiles>
        
     </servers>
 </settings>
