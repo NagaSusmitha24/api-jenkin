@@ -39,10 +39,10 @@
 						<server>anypoint-exchange-v3</server>
 						<username>kancharlanaga</username>
 						<password>Susmitha@123</password>
-						<businessGroupId>${businessGroup}</businessGroupId>
+						<businessGroupId>6c5ad96b-67a8-4bc6-8bb1-12443d5764e1</businessGroupId>
 						<environment>Sandbox</environment>
 						<target>Cloudhub-US-East-2</target>
-						<applicationName>cicd20maven</applicationName>
+						<applicationName>api</applicationName>
 						<replicas>1</replicas>
 						<vCores>0.1</vCores>
 						<deploymentSettings>
