@@ -20,8 +20,7 @@ pipeline {
                 bat '''
                 mvn clean package ^
                 -DskipTests ^
-                -s C:\Users\Admin\.m2\settings.xml
-                '''
+                -s C:\\Users\\Admin\\.m2\\settings.xml'
             }
         }
 
@@ -33,7 +32,7 @@ pipeline {
                 -DskipTests ^
                 -Danypoint.username=kancharlanaga ^
                 -Danypoint.password=Susmitha@123 ^
-                -s C:\\Users\\jenkins\\.m2\\settings.xml
+                -s C:\\Users\\Admin\\.m2\\settings.xml
                 '''
             }
         }
@@ -47,7 +46,7 @@ pipeline {
                 -DskipTests ^
                 -Danypoint.username=kancharlanaga ^
                 -Danypoint.password=Susmitha@123 ^
-                -s C:\\Users\\jenkins\\.m2\\settings.xml
+                -s C:\\Users\\Admin\\.m2\\settings.xml
                 '''
             }
         }
