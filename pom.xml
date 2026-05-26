@@ -9,13 +9,13 @@
 
     <groupId>bcd4b513-a887-4e07-b2c1-47e311f06160</groupId>
 
-    <artifactId>api-v1</artifactId>
+    <artifactId>api-susmitha</artifactId>
 
     <version>1.0.4</version>
 
     <packaging>mule-application</packaging>
 
-    <name>api-v1</name>
+    <name>api-susmitha</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
