@@ -26,7 +26,7 @@ pipeline {
                 bat """
                 mvn deploy ^
                   -DmuleDeploy ^
-                  -DmuleVersion=4.9.0 ^
+                  -DmuleVersion=4.8.12 ^
                   -DconnectedAppClientId=%CONNECTED_APP_CLIENT_ID% ^
                   -DconnectedAppClientSecret=%CONNECTED_APP_CLIENT_SECRET% ^
                   -DconnectedAppGrantType=client_credentials ^
