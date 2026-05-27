@@ -46,7 +46,7 @@
 
             <connectedAppGrantType>client_credentials</connectedAppGrantType>
 
-            <environment>Sandbox</environment>
+            <environment>Dev</environment>
 
             <businessGroupId>469e9fdb-66a0-442a-bd41-668b21a64f7c</businessGroupId>
 
