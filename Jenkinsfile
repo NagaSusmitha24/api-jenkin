@@ -45,7 +45,7 @@ pipeline {
                 -DconnectedAppClientSecret=%CONNECTED_APP_CLIENT_SECRET% ^
                 -DconnectedAppGrantType=client_credentials ^
                 -DbusinessGroupId=469e9fdb-66a0-442a-bd41-668b21a64f7c ^
-                -Denvironment=Sandbox ^
+                -Denvironment=Dev ^
                 -DworkerType=MICRO ^
                 -Dworkers=1 ^
                 -Dregion=us-west-2
