@@ -1,43 +1,26 @@
 pipeline {
     agent any
 
-
     stages {
-        stage('Checkout SCM') {
+
+        stage('Build & Deploy') {
+
             steps {
-                echo 'Checking out code from GitHub...'
-                checkout scm
+
+                withCredentials([
+                    string(credentialsId: 'mule-client-id', variable: 'CLIENT_ID'),
+                    string(credentialsId: 'mule-client-secret', variable: 'CLIENT_SECRET')
+                ]) {
+
+                    sh '''
+                    mvn clean deploy \
+                    -DskipTests \
+                    -DmuleDeploy \
+                    -Dconnected.app.client.id=c60aada09ed34f2598dae48f26082b78 \
+                    -Dconnected.app.client.secret=Eccc1Ddf6d02467495879aCA4f75D2DB
+                    '''
+                }
             }
         }
-
-       stage('Test') { 
-
-            steps { 
-
-                echo 'Application is in Testing Phase' 
-
-                bat 'mvn test' 
-
-            } 
-
-        } 
-
-        stage('Deploy to Cloudhub') { 
-
-            environment { 
-
-                ANYPOINT_CREDENTIALS = credentials('anypointplatform') 
-
-            } 
-
-            steps { 
-
-                bat 'mvn deploy -DmuleDeploy -DmuleVersion=4.4.0 -Dusername=c60aada09ed34f2598dae48f26082b78 -Dpassword=Eccc1Ddf6d02467495879aCA4f75D2DB -DworkerType=MICRO -Dworkers=1 -Dregion=us-west-2' 
-
-            } 
-
-        } 
-
-    } 
-
-} 
+    }
+}
