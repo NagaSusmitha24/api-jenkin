@@ -1,49 +1,57 @@
-pipeline { 
+pipeline {
 
-    agent any 
+    agent any
 
-    stages { 
+    stages {
 
-        stage('Build') { 
+        stage('Build') {
 
-            steps { 
+            steps {
 
-                echo 'Application is in Building Phase' 
+                echo 'Application is in Building Phase'
 
-                bat 'mvn clean install' 
+                bat 'mvn clean install'
 
-            } 
+            }
+        }
 
-        } 
+        stage('Test') {
 
-        stage('Test') { 
+            steps {
 
-            steps { 
+                echo 'Application is in Testing Phase'
 
-                echo 'Application is in Testing Phase' 
+                bat 'mvn test'
 
-                bat 'mvn test' 
+            }
+        }
 
-            } 
+        stage('Deploy to Cloudhub') {
 
-        } 
+            environment {
 
-        stage('Deploy to Cloudhub') { 
+                CONNECTED_APP_CLIENT_ID = credentials('mule-client-id')
+                CONNECTED_APP_CLIENT_SECRET = credentials('mule-client-secret')
 
-            environment { 
+            }
 
-                ANYPOINT_CREDENTIALS = credentials('anypointplatform') 
+            steps {
 
-            } 
+                bat '''
+                mvn deploy ^
+                -DmuleDeploy ^
+                -DmuleVersion=4.4.0 ^
+                -DconnectedAppClientId=%CONNECTED_APP_CLIENT_ID% ^
+                -DconnectedAppClientSecret=%CONNECTED_APP_CLIENT_SECRET% ^
+                -DconnectedAppGrantType=client_credentials ^
+                -DbusinessGroup=APICentrics ^
+                -Denvironment=Sandbox ^
+                -DworkerType=MICRO ^
+                -Dworkers=1 ^
+                -Dregion=us-west-2
+                '''
 
-            steps { 
-
-                bat 'mvn deploy -DmuleDeploy -DmuleVersion=4.4.0 -Dusername=c60aada09ed34f2598dae48f26082b78 -Dpassword=Eccc1Ddf6d02467495879aCA4f75D2DB -DworkerType=MICRO -Dworkers=1 -Dregion=us-west-2' 
-
-            } 
-
-        } 
-
-    } 
-
-} 
+            }
+        }
+    }
+}
