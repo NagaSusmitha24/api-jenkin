@@ -36,7 +36,7 @@
 
             <uri>https://anypoint.mulesoft.com</uri>
 
-            <muleVersion>4.6.0</muleVersion>
+            <muleVersion>4.11.0</muleVersion>
 
             <connectedAppClientId>c60aada09ed34f2598dae48f26082b78</connectedAppClientId>
 
