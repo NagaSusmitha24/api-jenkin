@@ -33,35 +33,33 @@
                 <artifactId>mule-maven-plugin</artifactId>
                 <version>${mule.maven.plugin.version}</version>
                 <extensions>true</extensions>
-                <configuration>
-                    <cloudHubDeployment> 
+              <configuration>
+        <cloudHubDeployment>
 
-<uri>https://anypoint.mulesoft.com</uri> 
+            <uri>https://anypoint.mulesoft.com</uri>
 
-<muleVersion>4.4.0</muleVersion> 
+            <muleVersion>4.6.0</muleVersion>
 
-<username>c60aada09ed34f2598dae48f26082b78</username> 
+            <connectedAppClientId>c60aada09ed34f2598dae48f26082b78</connectedAppClientId>
 
-<password>Eccc1Ddf6d02467495879aCA4f75D2DB</password> 
+            <connectedAppClientSecret>Eccc1Ddf6d02467495879aCA4f75D2DB</connectedAppClientSecret>
 
-<applicationName>api-susmitha-demo-api</applicationName> 
+            <connectedAppGrantType>client_credentials</connectedAppGrantType>
 
-<environment>Dev</environment> 
+            <environment>Sandbox</environment>
 
-<region>us-east-2</region> 
+            <businessGroup>YourBG</businessGroup>
 
-<workers>1</workers> 
+            <applicationName>api-susmitha-demo-api</applicationName>
 
-<workerType>MICRO</workerType> 
+            <workers>1</workers>
 
-<properties> 
+            <workerType>MICRO</workerType>
 
-<key>value</key> 
+            <region>us-east-1</region>
 
-</properties> 
-
-</cloudHubDeployment> 
-                </configuration>
+        </cloudHubDeployment>
+    </configuration>
                 
             </plugin>
         </plugins>
