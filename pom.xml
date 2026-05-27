@@ -15,7 +15,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<app.runtime>4.11.0</app.runtime>
+		<app.runtime>4.8.0</app.runtime>
 		<mule.maven.plugin.version>4.7.0</mule.maven.plugin.version>
 	</properties>
 
@@ -36,7 +36,7 @@
 
             <uri>https://anypoint.mulesoft.com</uri>
 
-            <muleVersion>4.11.0</muleVersion>
+            <muleVersion>4.8.0</muleVersion>
 
             <connectedAppClientId>c60aada09ed34f2598dae48f26082b78</connectedAppClientId>
 
