@@ -4,10 +4,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>0c18259d-596e-4342-88f4-05dc50278018</groupId>
-	<artifactId>api</artifactId>
-	<version>1.0.1</version>
-	<packaging>mule-application</packaging>
+	<groupId>com.susmitha</groupId>
+<artifactId>api</artifactId>
+<version>1.0.1</version>
+<packaging>mule-application</packaging>
 
 	<name>api</name>
 
@@ -29,37 +29,41 @@
 				<artifactId>maven-clean-plugin</artifactId>
 				<version>3.2.0</version>
 			</plugin>
-			 <plugin>
-                <groupId>org.mule.tools.maven</groupId>
-                <artifactId>mule-maven-plugin</artifactId>
-                <version>${mule.maven.plugin.version}</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <cloudhub2Deployment>
-                        <uri>https://anypoint.mulesoft.com</uri>
-                        <provider>MC</provider>
-                        <muleVersion>4.9.17</muleVersion>
-                        <server>anypoint-exchange-v3</server>
-                        <username>Durga-May</username>
-                        <password>Durga@53</password>
-                        <businessGroupId>0c18259d-596e-4342-88f4-05dc50278018</businessGroupId>
-                        <environment>Sandbox</environment>
-                        <target>Cloudhub-US-East-2</target>
-                        <applicationName>api</applicationName>
-                        <replicas>1</replicas>
-                        <vCores>0.1</vCores>
- 
-        
-                        <deploymentTimeout>1200000</deploymentTimeout>
- 
-                        <deploymentSettings>
-                            <lastMileSecurity>false</lastMileSecurity>
-                            <forwardSslSession>false</forwardSslSession>
-                            <generateDefaultPublicUrl>true</generateDefaultPublicUrl>
-                        </deploymentSettings>
-                    </cloudhub2Deployment>
-                </configuration>
-            </plugin>
+			<plugin>
+
+    <groupId>org.mule.tools.maven</groupId>
+    <artifactId>mule-maven-plugin</artifactId>
+    <version>4.7.0</version>
+
+    <extensions>true</extensions>
+
+    <configuration>
+
+        <cloudhub2Deployment>
+
+            <uri>https://anypoint.mulesoft.com</uri>
+
+            <provider>MC</provider>
+
+            <environment>Sandbox</environment>
+
+            <target>Cloudhub-US-East-2</target>
+
+            <muleVersion>4.11.0</muleVersion>
+
+            <javaVersion>17</javaVersion>
+
+            <applicationName>susmitha-api</applicationName>
+
+            <replicas>1</replicas>
+
+            <vCores>0.1</vCores>
+
+        </cloudhub2Deployment>
+
+    </configuration>
+
+</plugin>
 		
 		</plugins>
 	</build>
