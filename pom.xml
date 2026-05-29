@@ -60,7 +60,7 @@
                     </cloudhub2Deployment>
                 </configuration>
             </plugin>
-			</plugin>
+		
 		</plugins>
 	</build>
 
