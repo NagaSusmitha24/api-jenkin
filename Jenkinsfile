@@ -2,42 +2,52 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven3'    // Must match Jenkins Global Tool name
-        jdk 'JDK8'        // Must match Jenkins Global Tool name
+        maven 'Maven3'   // Must match Jenkins Global Tool Configuration name
+        jdk 'JDK8'       // Must match Jenkins Global Tool Configuration name
     }
 
-    // ── Change these to match your setup ──────────────────────
     environment {
-        ANYPOINT_CREDENTIALS  = credentials('anypoint-credentials')
-        APP_NAME              = 'my-mule-app'
-        CLOUDHUB_ENV          = 'Sandbox'
-        CLOUDHUB_TARGET       = 'Cloudhub-US-East-1'
-        MULE_VERSION          = '4.4.0'
-        REPLICAS              = '1'
-        VCORES                = '0.1'
-        BUSINESS_GROUP_ID     = ''   // Leave blank if no business group
+        // Jenkins Credentials ID — add in Jenkins → Manage Credentials
+        ANYPOINT_CREDENTIALS    = credentials('anypoint-credentials')
+
+        // App & Deployment Config — matches your pom.xml
+        APP_NAME                = 'bit-bucket-demo'
+        BUSINESS_GROUP_ID       = '0c18259d-596e-4342-88f4-05dc50278018'
+        CLOUDHUB_ENV            = 'Sandbox'
+        CLOUDHUB_TARGET         = 'Cloudhub-US-East-2'
+        MULE_VERSION            = '4.9.17'
+        REPLICAS                = '1'
+        VCORES                  = '0.1'
     }
-    // ──────────────────────────────────────────────────────────
 
     stages {
 
         stage('Checkout') {
             steps {
-                echo '========== Checking out source code =========='
+                echo '===== Checking out code from repository ====='
                 checkout scm
             }
         }
 
         stage('Build') {
             steps {
-                echo '========== Building Mule Application =========='
+                echo '===== Building Mule Application ====='
                 sh 'mvn clean package -DskipTests'
+            }
+            post {
+                success {
+                    echo 'Build SUCCESS'
+                    archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+                }
+                failure {
+                    echo 'Build FAILED'
+                }
             }
         }
 
         stage('Test') {
             steps {
-                echo '========== Running Unit Tests =========='
+                echo '===== Running Tests ====='
                 sh 'mvn test'
             }
             post {
@@ -50,39 +60,53 @@ pipeline {
 
         stage('Deploy to CloudHub 2.0') {
             steps {
-                echo '========== Deploying to CloudHub 2.0 =========='
+                echo '===== Deploying to CloudHub 2.0 ====='
                 sh """
                     mvn deploy -DmuleDeploy \
-                        -Danypoint.username=${ANYPOINT_CREDENTIALS_USR} \
-                        -Danypoint.password=${ANYPOINT_CREDENTIALS_PSW} \
-                        -Dapp.name=${APP_NAME} \
-                        -Denv=${CLOUDHUB_ENV} \
-                        -Dtarget=${CLOUDHUB_TARGET} \
-                        -DmuleVersion=${MULE_VERSION} \
-                        -Dreplicas=${REPLICAS} \
-                        -DvCores=${VCORES} \
-                        -DskipTests
+                        -Danypoint.username=Durga-May \
+                        -Danypoint.password=Durga@53 \
+                        -DbusinessGroup=0c18259d-596e-4342-88f4-05dc50278018 \
+                        -Denv=Sandbox \
+                        -Dtarget=Cloudhub-US-East-2 \
+                        -DmuleVersion=4.9.17 \
+                        -Dreplicas=1 \
+                        -DvCores=0.1 \
+                        -DskipTests \
+                        -s ~/.m2/settings.xml
                 """
+            }
+            post {
+                success {
+                    echo """
+                    ============================================
+                     Deployment to CloudHub 2.0 SUCCESSFUL!
+                     App Name : ${APP_NAME}
+                     Env      : ${CLOUDHUB_ENV}
+                     Target   : ${CLOUDHUB_TARGET}
+                    ============================================
+                    """
+                }
+                failure {
+                    echo """
+                    ============================================
+                     Deployment FAILED!
+                     Check console output for details.
+                    ============================================
+                    """
+                }
             }
         }
     }
 
     post {
         success {
-            echo '=========================================='
-            echo " Deployment to CloudHub 2.0 SUCCESSFUL!"
-            echo " App: ${APP_NAME}"
-            echo " Env: ${CLOUDHUB_ENV}"
-            echo '=========================================='
+            echo 'Pipeline completed successfully!'
         }
         failure {
-            echo '=========================================='
-            echo " Deployment FAILED!"
-            echo ' Check console output for details.'
-            echo '=========================================='
+            echo 'Pipeline failed — check the logs!'
         }
         always {
-            cleanWs()  // Clean workspace after build
+            cleanWs()
         }
     }
 }
