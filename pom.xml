@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.susmitha</groupId>
+    <groupId>0c18259d-596e-4342-88f4-05dc5027801</groupId>
     <artifactId>susmitha-api</artifactId>
     <version>1.0.1</version>
     <packaging>mule-application</packaging>
