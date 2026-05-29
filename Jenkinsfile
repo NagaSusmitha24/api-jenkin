@@ -1,44 +1,67 @@
 pipeline {
     agent any
+
     tools {
-        jdk 'JDK17'
+        maven 'Maven3'    // Must match Jenkins Global Tool name
+        jdk 'JDK8'        // Must match Jenkins Global Tool name
     }
 
+    // ── Change these to match your setup ──────────────────────
+    environment {
+        ANYPOINT_CREDENTIALS  = credentials('anypoint-credentials')
+        APP_NAME              = 'my-mule-app'
+        CLOUDHUB_ENV          = 'Sandbox'
+        CLOUDHUB_TARGET       = 'Cloudhub-US-East-1'
+        MULE_VERSION          = '4.4.0'
+        REPLICAS              = '1'
+        VCORES                = '0.1'
+        BUSINESS_GROUP_ID     = ''   // Leave blank if no business group
+    }
+    // ──────────────────────────────────────────────────────────
 
     stages {
+
+        stage('Checkout') {
+            steps {
+                echo '========== Checking out source code =========='
+                checkout scm
+            }
+        }
+
         stage('Build') {
             steps {
-                echo '📦 Application is in Building Phase'
-                bat 'mvn clean install'
+                echo '========== Building Mule Application =========='
+                sh 'mvn clean package -DskipTests'
             }
         }
 
         stage('Test') {
             steps {
-                echo '🧪 Application is in Testing Phase'
-                bat 'mvn test'
+                echo '========== Running Unit Tests =========='
+                sh 'mvn test'
+            }
+            post {
+                always {
+                    junit allowEmptyResults: true,
+                          testResults: '**/target/surefire-reports/*.xml'
+                }
             }
         }
 
-        stage('Deploy to CloudHub') {
-            environment {
-                CONNECTED_APP_CLIENT_ID     = credentials('mule-client-id')
-                CONNECTED_APP_CLIENT_SECRET = credentials('mule-client-secret')
-            }
+        stage('Deploy to CloudHub 2.0') {
             steps {
-                echo '🚀 Deploying to CloudHub...'
-                bat """
-                mvn deploy ^
-                  -DmuleDeploy ^
-                  -DmuleVersion=4.8.12 ^
-                  -DconnectedAppClientId=%CONNECTED_APP_CLIENT_ID% ^
-                  -DconnectedAppClientSecret=%CONNECTED_APP_CLIENT_SECRET% ^
-                  -DconnectedAppGrantType=client_credentials ^
-                  -DbusinessGroupId=469e9fdb-66a0-442a-bd41-668b21a64f7c ^
-                  -Denvironment=Dev ^
-                  -DworkerType=MICRO ^
-                  -Dworkers=1 ^
-                  -Dregion=us-west-2
+                echo '========== Deploying to CloudHub 2.0 =========='
+                sh """
+                    mvn deploy -DmuleDeploy \
+                        -Danypoint.username=${ANYPOINT_CREDENTIALS_USR} \
+                        -Danypoint.password=${ANYPOINT_CREDENTIALS_PSW} \
+                        -Dapp.name=${APP_NAME} \
+                        -Denv=${CLOUDHUB_ENV} \
+                        -Dtarget=${CLOUDHUB_TARGET} \
+                        -DmuleVersion=${MULE_VERSION} \
+                        -Dreplicas=${REPLICAS} \
+                        -DvCores=${VCORES} \
+                        -DskipTests
                 """
             }
         }
@@ -46,10 +69,20 @@ pipeline {
 
     post {
         success {
-            echo "✅ Deployment to CloudHub succeeded!"
+            echo '=========================================='
+            echo " Deployment to CloudHub 2.0 SUCCESSFUL!"
+            echo " App: ${APP_NAME}"
+            echo " Env: ${CLOUDHUB_ENV}"
+            echo '=========================================='
         }
         failure {
-            echo "❌ Deployment failed. Check logs for details."
+            echo '=========================================='
+            echo " Deployment FAILED!"
+            echo ' Check console output for details.'
+            echo '=========================================='
+        }
+        always {
+            cleanWs()  // Clean workspace after build
         }
     }
 }
