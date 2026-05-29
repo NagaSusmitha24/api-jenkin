@@ -17,8 +17,8 @@
 		<app.runtime>4.9.17</app.runtime>
 		<mule.maven.plugin.version>4.7.0</mule.maven.plugin.version>
 		<!-- These are passed from Jenkins pipeline -->
-		<anypoint.username></anypoint.username>
-		<anypoint.password></anypoint.password>
+		<anypoint.username>Durga-May</anypoint.username>
+		<anypoint.password>Durga@53</anypoint.password>
 		<businessGroup>0c18259d-596e-4342-88f4-05dc50278018</businessGroup>
 	</properties>
 
