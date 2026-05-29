@@ -45,7 +45,7 @@
                         <businessGroupId>0c18259d-596e-4342-88f4-05dc50278018</businessGroupId>
                         <environment>Sandbox</environment>
                         <target>Cloudhub-US-East-2</target>
-                        <applicationName>bit-bucket-demo</applicationName>
+                        <applicationName>api</applicationName>
                         <replicas>1</replicas>
                         <vCores>0.1</vCores>
  
