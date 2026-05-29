@@ -32,7 +32,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo '===== Building Mule Application ====='
-                sh 'mvn clean package -DskipTests'
+                bat 'mvn clean package -DskipTests'
             }
             post {
                 success {
@@ -48,7 +48,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo '===== Running Tests ====='
-                sh 'mvn test'
+                bat 'mvn test'
             }
             post {
                 always {
@@ -61,7 +61,7 @@ pipeline {
         stage('Deploy to CloudHub 2.0') {
             steps {
                 echo '===== Deploying to CloudHub 2.0 ====='
-                sh """
+                bat """
                     mvn deploy -DmuleDeploy \
                         -Danypoint.username=Durga-May \
                         -Danypoint.password=Durga@53 \
