@@ -7,13 +7,7 @@
     <servers>
         <!-- Anypoint Exchange Authentication -->
         <server>
-            <id>anypoint-exchange-v3</id>
-            <username>Durga-May</username>
-            <password>Durga@53</password>
-        </server>
-        <!-- MuleSoft Releases Repository -->
-        <server>
-            <id>mulesoft-releases</id>
+            <id>anypoint-exchange</id> <!-- must match pom.xml -->
             <username>Durga-May</username>
             <password>Durga@53</password>
         </server>
@@ -31,42 +25,20 @@
             </activation>
             <repositories>
                 <repository>
-                    <id>anypoint-exchange-v3</id>
-                    <name>Anypoint Exchange</name>
+                    <id>anypoint-exchange</id>
                     <url>https://maven.anypoint.mulesoft.com/api/v3/maven</url>
-                    <releases>
-                        <enabled>true</enabled>
-                    </releases>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
                 </repository>
                 <repository>
                     <id>mulesoft-releases</id>
-                    <name>MuleSoft Releases</name>
-                    <url>https://repository.mulesoft.org/nexus/repository/releases/</url>
-                    <releases>
-                        <enabled>true</enabled>
-                    </releases>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
+                    <url>https://repository.mulesoft.org/releases/</url>
                 </repository>
             </repositories>
             <pluginRepositories>
                 <pluginRepository>
                     <id>mulesoft-releases</id>
-                    <name>MuleSoft Releases</name>
                     <url>https://repository.mulesoft.org/nexus/repository/releases/</url>
-                    <releases>
-                        <enabled>true</enabled>
-                    </releases>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
                 </pluginRepository>
             </pluginRepositories>
         </profile>
     </profiles>
-
 </settings>
