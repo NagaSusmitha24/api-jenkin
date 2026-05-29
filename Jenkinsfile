@@ -72,7 +72,7 @@ pipeline {
                         -Dreplicas=1 \
                         -DvCores=0.1 \
                         -DskipTests \
-                        -s C:\Users\Admin\.m2\settings.xml
+                        -s C:\\Users\\Admin\\.m2\\settings.xml
                 """
             }
             post {
