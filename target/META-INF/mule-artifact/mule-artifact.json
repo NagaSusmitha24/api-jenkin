@@ -1,12 +1,12 @@
 {
   "configs": [
-    "world-time-api-for-jenkins.xml"
+    "world-time.xml"
   ],
   "secureProperties": [],
   "supportedJavaVersions": [],
   "redeploymentEnabled": true,
-  "name": "bcd4b513-a887-4e07-b2c1-47e311f06160:world-time:1.0.0-SNAPSHOT",
-  "minMuleVersion": "4.11.0",
+  "name": "6c5ad96b-67a8-4bc6-8bb1-12443d5764e1:susmitha-api-hello:1.0.4",
+  "minMuleVersion": "4.9.17",
   "requiredProduct": "MULE_EE",
   "classLoaderModelLoaderDescriptor": {
     "id": "mule",
@@ -14,7 +14,7 @@
       "exportedPackages": [],
       "exportedResources": [
         "log4j2.xml",
-        "world-time-api-for-jenkins.xml"
+        "world-time.xml"
       ]
     }
   },

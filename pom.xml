@@ -4,12 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>0c18259d-596e-4342-88f4-05dc5027801</groupId>
-    <artifactId>susmitha-api</artifactId>
-    <version>1.0.1</version>
+    <groupId>6c5ad96b-67a8-4bc6-8bb1-12443d5764e1</groupId>
+    <artifactId>susmitha-api-hello</artifactId>
+    <version>1.0.4</version>
     <packaging>mule-application</packaging>
 
-    <name>susmitha-api</name>
+    <name>susmitha-api-hello</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -20,38 +20,56 @@
 
     <build>
         <plugins>
-            <plugin>
+		 <plugin>
                 <groupId>org.mule.tools.maven</groupId>
                 <artifactId>mule-maven-plugin</artifactId>
                 <version>${mule.maven.plugin.version}</version>
                 <extensions>true</extensions>
-                <configuration>
-                    <cloudhub2Deployment>
-                        <uri>https://anypoint.mulesoft.com</uri>
-                        <provider>MC</provider>
-                        <environment>Sandbox</environment>
-                        <target>Cloudhub-US-East-2</target>
-                        <muleVersion>${app.runtime}</muleVersion>
-                        <javaVersion>17</javaVersion>
-                        <applicationName>susmitha-api</applicationName>
-                        <replicas>1</replicas>
-                        <vCores>0.1</vCores>
-                    </cloudhub2Deployment>
-                </configuration>
+            
+                 <configuration>
+        <cloudhub2Deployment>
+
+            <uri>https://anypoint.mulesoft.com</uri>
+
+            <provider>MC</provider>
+
+            <environment>Sandbox</environment>
+
+            <target>Cloudhub-US-East-2</target>
+
+            <applicationName>susmitha-api-hello</applicationName>
+
+            <replicas>1</replicas>
+
+            <vCores>0.1</vCores>
+
+            <businessGroupId>6c5ad96b-67a8-4bc6-8bb1-12443d5764e1</businessGroupId>
+
+            <connectedAppClientId>c09ce27b91784380bf8646a62ec65c9d</connectedAppClientId>
+
+            <connectedAppClientSecret>8b7B8D66306E47a29f4e3007547774f4</connectedAppClientSecret>
+
+            <connectedAppGrantType>client_credentials</connectedAppGrantType>
+
+        </cloudhub2Deployment>
+    </configuration>
             </plugin>
         </plugins>
     </build>
 
-    <distributionManagement>
-        <repository>
-            <id>anypoint-exchange</id>
-            <url>https://maven.anypoint.mulesoft.com/api/v3/organizations/0c18259d-596e-4342-88f4-05dc50278018/maven</url>
-        </repository>
-    </distributionManagement>
+   <distributionManagement>
+    <repository>
+        <id>anypoint-exchange-v3</id>
+        <name>Exchange</name>
+        <url>
+            https://maven.anypoint.mulesoft.com/api/v3/organizations/6c5ad96b-67a8-4bc6-8bb1-12443d5764e1/maven
+        </url>
+    </repository>
+</distributionManagement>
 
     <repositories>
         <repository>
-            <id>anypoint-exchange</id>
+            <id>anypoint-exchange-v3</id>
             <url>https://maven.anypoint.mulesoft.com/api/v3/maven</url>
         </repository>
         <repository>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 
+          http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <servers>
+        <!-- Anypoint Exchange Authentication -->
+        <server>
+            <id>anypoint-exchange</id> <!-- must match pom.xml -->
+            <username>Durga-May</username>
+            <password>Durga@53</password>
+        </server>
+    </servers>
+
+    <pluginGroups>
+        <pluginGroup>org.mule.tools.maven</pluginGroup>
+    </pluginGroups>
+
+    <profiles>
+        <profile>
+            <id>mule-extra-repos</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>anypoint-exchange</id>
+                    <url>https://maven.anypoint.mulesoft.com/api/v3/maven</url>
+                </repository>
+                <repository>
+                    <id>mulesoft-releases</id>
+                    <url>https://repository.mulesoft.org/releases/</url>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>mulesoft-releases</id>
+                    <url>https://repository.mulesoft.org/nexus/repository/releases/</url>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+</settings>

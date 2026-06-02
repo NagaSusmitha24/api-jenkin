@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.mulesoft.mule.services</groupId>
+        <artifactId>mule-service-http-ee-parent</artifactId>
+        <version>1.14.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>HTTP Service EE Implementation</name>
+    <description>EE Extension of the Grizzly based HTTP Service implementation</description>
+
+    <artifactId>mule-service-http-ee</artifactId>
+    <packaging>mule-service</packaging>
+
+    <properties>
+        <!-- Add visibility required by the tests exclusively -->
+        <surefire.args>
+            -XX:+IgnoreUnrecognizedVMOptions
+            --add-exports=org.mule.service.http/org.mule.service.http.impl.service=ALL-UNNAMED
+            --add-exports=org.mule.service.http/org.mule.service.http.impl.service.client=ALL-UNNAMED
+            --add-exports=org.mule.service.http/org.mule.service.http.impl.service.domain.entity.multipart=ALL-UNNAMED
+            --add-exports=org.mule.service.http/org.mule.service.http.impl.service.server=ALL-UNNAMED
+            --add-opens=org.mule.service.http/org.mule.service.http.impl.service.server=ALL-UNNAMED
+            --add-opens=com.mulesoft.mule.service.http.ee/com.mulesoft.service.http.test.util=ALL-UNNAMED
+            --add-exports=com.mulesoft.mule.service.http.ee/com.mulesoft.service.http.test.util=java.base
+            --add-exports=com.mulesoft.mule.service.http.ee/com.mulesoft.service.http.test.util=ALL-UNNAMED
+            --add-exports=org.mule.service.http/org.mule.service.http.impl.service.server.grizzly=ALL-UNNAMED
+            --add-exports=org.mule.service.http.netty/org.mule.service.http.netty.impl.message.content=ALL-UNNAMED
+            --add-exports=com.mulesoft.mule.service.http.ee/com.mulesoft.service.http.impl.service=ALL-UNNAMED
+              --add-opens=jakarta.mail/com.sun.mail.util=org.mule.service.http
+              --add-opens=jakarta.mail/com.sun.mail.util=ALL-UNNAMED
+            ${surefire.test.unit.open.args}
+        </surefire.args>
+        <javaModuleName>com.mulesoft.mule.service.http.ee</javaModuleName>
+        <skipExportTests>false</skipExportTests>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.mule.runtime.plugins</groupId>
+                <artifactId>mule-service-maven-plugin</artifactId>
+                <extensions>true</extensions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <systemPropertyVariables combine.children="append">
+                        <java.net.preferIPv4Stack>true</java.net.preferIPv4Stack>
+                        <testClasspathDir>${project.build.testOutputDirectory}</testClasspathDir>
+
+                        <!-- This must be a host with at least 2 different IP addresses -->
+                        <domainNameResolver.test.host>salesforce.com</domainNameResolver.test.host>
+                        <!-- This must be a host that cannot be resolved -->
+                        <domainNameResolver.test.unknownHost>unknown.mulesoft.unknown</domainNameResolver.test.unknownHost>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.mulesoft.mule.runtime</groupId>
+            <artifactId>mule-core-ee</artifactId>
+            <version>${mule.version}</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.sun.mail</groupId>
+                    <artifactId>jakarta.mail</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.runtime</groupId>
+            <artifactId>mule-http-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.services</groupId>
+            <artifactId>mule-service-http</artifactId>
+        </dependency>
+        <!-- Required by legacy (Grizzly) WebSockets implementation -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <!-- Unit tests -->
+        <dependency>
+            <groupId>org.mule.runtime</groupId>
+            <artifactId>mule-module-tls</artifactId>
+            <version>${mule.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.services</groupId>
+            <artifactId>mule-service-http</artifactId>
+            <classifier>tests</classifier>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.services</groupId>
+            <artifactId>mule-netty-http-service</artifactId>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.mulesoft.mule.runtime</groupId>
+            <artifactId>mule-core-ee</artifactId>
+            <version>${mule.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.tests</groupId>
+            <artifactId>mule-tests-unit</artifactId>
+            <version>${mule.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents.client5</groupId>
+            <artifactId>httpclient5</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents.client5</groupId>
+            <artifactId>httpclient5-fluent</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.peterwippermann.junit4</groupId>
+            <artifactId>parameterized-suite</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- For websockets tests -->
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty.websocket</groupId>
+            <artifactId>websocket-servlet</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.mulesoft.mule.services</groupId>
+            <artifactId>mule-service-http-ee-ws-client</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty.websocket</groupId>
+            <artifactId>websocket-jetty-server</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>

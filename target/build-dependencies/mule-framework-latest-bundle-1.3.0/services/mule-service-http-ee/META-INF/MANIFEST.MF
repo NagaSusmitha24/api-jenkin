@@ -1,0 +1,30 @@
+Manifest-Version: 1.0
+Created-By: Maven JAR Plugin 3.5.0
+Java-Version: 17
+Build-Jdk-Spec: 17
+Specification-Title: HTTP Service EE Implementation
+Specification-Version: 1.14
+Specification-Vendor: MuleSoft, Inc.
+Implementation-Title: HTTP Service EE Implementation
+Implementation-Version: 1.14.0
+Implementation-Vendor: MuleSoft, Inc.
+Automatic-Module-Name: com.mulesoft.mule.service.http.ee
+Build-Date: 
+Build-Revision: ef0683f2
+Description: Mule Runtime and Integration Platform
+Dev-List-Email: mule-esb@mulesoft.com
+Git-branch: 1.14.0
+Git-commit-id: ef0683f2770d727acba9f01686f9503c5d083065
+Git-commit-id-describe: 1.14.0-rc4-2-gef0683f
+Git-commit-time: 2026-01-28T19:38:03+0000
+Git-remote-origin-url: https://github.com/mulesoft-emu/mule-http-ee-serv
+ ice.git
+Git-tags: 
+License: CPAL v1.0 http://www.mulesoft.com/CPAL/
+More-Info: For more information go to https://developer.mulesoft.com/
+Product-Url: https://developer.mulesoft.com/
+Recommended-Jdks: [17,18),[21,22)
+Support: Get commercial support: http://www.mulesoft.com/support
+Supported-Jdks: [17,22)
+Vendor-Url: http://www.mulesoft.com
+
